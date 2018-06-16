@@ -1,0 +1,31 @@
+/******************************************************************************
+
+                              Online C++ Compiler.
+               Code, Compile, Run and Debug C++ program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+// Practice Chapter 3 Question 23
+#include <iostream>
+
+using namespace std;
+
+float total1,total2, share1,share2, com1,com2,profit;
+
+int main()
+{
+    share1 = 45.50;
+    share2= 56.90;
+    total1 = share1 * 1000;
+    total2= share2 * 1000;
+    com1 = total1 * .02;
+    com2 =total2 * .02;
+    profit= (total2 - total1) - (com2+com1);
+    
+    cout<<"Joe paid " <<total1 << " for 1000 stocks" << endl;
+    cout <<"Joe's commission was "<< com1 << endl;
+    cout << "Joe sold his stock for "<<total2 << endl;
+    cout << "Joe's commsion was " << com2 << endl;
+    cout << "joes profit is " << profit << endl;
+    return 0;
+}
