@@ -1,0 +1,53 @@
+// LargerThanN.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//CH7Q4 
+
+#include "pch.h"
+#include <iostream>
+#include<cstdlib>
+#include<ctime>
+using namespace std;
+
+void printarr(int arr1[], int);
+void LargerThanN(int arr1[], int, int);
+
+int main()
+{
+	const int size = 10; 
+	const int MIN_value = 1, MAX_value = 50;
+	int arr1[size];
+	unsigned seed = time(0);
+	srand(seed);
+	int n = (rand() % (MAX_value - MIN_value + 1) + MIN_value);
+
+	for (int i = 0; i < size; i++)
+	{
+		arr1[i] = (rand() % (MAX_value - MIN_value + 1) + MIN_value);
+	}
+
+	
+	printarr(arr1, size);
+	LargerThanN(arr1, size, n);
+
+	return 0;
+}
+void printarr(int arr1[], int s)
+{
+	for (int i = 0; i < s; i++)
+	{
+		cout << arr1[i] << " ";
+	}
+	cout << endl;
+}
+void LargerThanN(int arr1[], int s, int num)
+{
+	int count = 0;
+	for (int i = 0; i < s; i++)
+	{
+		if (num < arr1[i])
+		{
+			count++;
+		}
+	}
+	cout << "n is equal to: " << num << endl;
+	cout << "There is " << count << " numbers bigger than n"; 
+}
