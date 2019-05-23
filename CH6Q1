@@ -1,0 +1,42 @@
+// Markup.cpp : This file contains the 'main' function. Program execution begins and ends there.
+//CH6Q1 from C++ From control structures to objects, by Tony Gaddis
+
+#include "pch.h"
+#include <iostream>
+#include<string>
+using namespace std;
+
+float calculateRetail(float x, float y);
+
+int main()
+{
+	float wholeS = 0, markU = 0;
+
+	cout << "Enter the wholesale cost of the item: " << endl;
+	cin >> wholeS;
+	if (wholeS < 0)
+	{
+		cout << "Invalid input, Enter the wholesale cost of the item: " << endl;
+		cin >> wholeS;
+	}
+	cout << "Enter the markup percentage of the item: " << endl;
+	cin >> markU;
+	if (markU < 0)
+	{
+		cout << "Invalid input. Enter the markup percentage of the item: " << endl;
+		cin >> markU;
+	}
+
+	calculateRetail(wholeS, markU);
+
+	
+	return 0;
+
+}
+float calculateRetail(float x, float y)
+{
+	float c = (y / 100) * x;
+	float retailP = c + x;
+
+	return retailP;
+}
