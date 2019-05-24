@@ -14,7 +14,6 @@ int *arral(int);
 int main()
 {
    int size;
-   int arr1[size];
    int *arrptr;
    
    std::cout << "Enter the size of the array between 1 and 10 \n";
