@@ -1,0 +1,56 @@
+/******************************************************************************
+Array Allocater CH9Q1
+Write a function that dynamically allocates an array of integers. The function should accept an
+Integer argument indicating the numger of elements to allocate. The function should return a pointer 
+To the array. 
+*******************************************************************************/
+#include <stdio.h>
+#include<iostream> 
+#include<cstdlib> 
+#include<ctime> 
+
+int *arral(int);
+
+int main()
+{
+   int size;
+   int arr1[size];
+   int *arrptr;
+   
+   std::cout << "Enter the size of the array between 1 and 10 \n";
+   std::cin>> size;
+   
+   if (size < 1 || size > 10)
+   {    
+       std::cout <<"\n Invalid Input, Enter the size of the array between 1 and 10 \n.";
+       std::cin >> size; 
+   }
+   
+   arrptr = arral(size);
+   delete[] arrptr;
+   
+
+    return 0;
+}
+int *arral(int s)
+{
+    const int MIN_value = 1, MAX_value = 10;
+    unsigned seed = time(0);
+    srand(seed);
+    int *arrayptr = new int[s];
+    
+    for (int i = 0; i < s; i++)
+    {
+        arrayptr[i] = (rand() % (MAX_value - MIN_value + 1) + MIN_value); 
+        std::cout << arrayptr[i]<< "\t";
+        
+    }
+    return arrayptr;
+}
+
+
+
+
+
+
+
