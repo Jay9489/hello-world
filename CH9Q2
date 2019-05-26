@@ -48,7 +48,10 @@ int main()
     //ascending sort
     std::cout<<"Now sorting in ascending order: \n";
     ascend(arrptr, size);
-
+    
+    // Free dynamically allocated memory
+    delete [] arrptr;
+    arrptr = nullptr;
  
     return 0;
 }
