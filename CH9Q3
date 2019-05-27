@@ -1,0 +1,110 @@
+/******************************************************************************
+Drop Lowest Test score. 
+1. Modify Question 2 to drop lowest test score
+2.Calculate avg
+
+*******************************************************************************/
+#include <stdio.h>
+#include<iostream> 
+#include<cstdlib> 
+#include<ctime> 
+
+
+double avg(double *, int);
+void ascend(double *, int);
+
+int main()
+{
+    int size;
+    double *arrptr = nullptr; // to point to the numbers
+    const int MIN_value = 0, MAX_value = 100;
+    unsigned seed = time(0);
+    srand(seed);
+    
+    // get size of array. 
+    std::cout<<"How many test score will be entered: ";
+    std:: cin>> size; 
+    if (size < 1 || size > 30)
+    {
+        std::cout<<"Invalid test score: There is a max of 30 students per class and min of 1. \n Please enter how many test scores: ";
+        std::cin >> size;
+        
+    }
+    // Dynamically allocate array with the user inputting size 
+    arrptr = new double[size]; 
+    //* auto generates test scores for testing and convenience.
+    for (int i = 0; i < size; i++)
+    {
+        *(arrptr + i) =  (rand() % (MAX_value - MIN_value +1) + MIN_value);
+        std::cout << *(arrptr + i) << "\t"; // test to see scores
+    }
+    std::cout <<"\n";
+   
+    //ascending sort
+    std::cout<<"Now sorting in ascending order: \n";
+   ascend(arrptr, size);
+    
+    // drop lowest
+    drop(arrptr, size);
+    // avg function call
+    avg(arrptr, size);
+    // Free dynamically allocated memory
+    delete [] arrptr;
+    arrptr = nullptr;
+ 
+    return 0;
+}
+double avg (double *p, int s)
+{
+    double sum = 0; 
+    //iterate through array adding all the values into sum
+    for (int i = 1; i < s; i++)
+    {
+        sum += *(p + i); 
+    }
+    //divide sum by size;
+    double a = (sum /(s - 1)); 
+    
+    std::cout <<"\nThe average test score is : "; std::cout << a; std::cout <<"\n";
+
+}
+void ascend(double *b, int s) // still needs work.
+{
+   int startScan, minIndex;
+   double minElem;
+   
+   for (startScan = 0; startScan < (s - 1); startScan++)
+   {
+       minIndex = startScan;
+       minElem = b[startScan];
+       //std::cout << minElem;
+       
+       for (int index = startScan + 1; index < s; index++)
+       {
+           if (b[index] < minElem)
+           {
+               minElem = b[index];
+               minIndex = index;
+           }
+       }
+       b[minIndex] = b[startScan];
+       b[startScan] = minElem;
+   }
+   
+   for (int d = 0; d < s; d++)
+   {
+       std::cout << b[d]; std::cout << "\t";
+   }
+   std::cout << "\n";
+   
+}
+
+
+
+
+
+
+
+
+
+
