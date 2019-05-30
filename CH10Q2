@@ -1,0 +1,43 @@
+/******************************************************************************
+CH10Q2 Backward string 
+1. A function that accepts a pointer to a C-string argument
+2. displays its contents backwards. 
+
+
+*******************************************************************************/
+#include <stdio.h>
+#include<iostream> 
+#include<cstring> 
+
+using namespace std;
+
+void reverse(char *);
+
+int main()
+{
+    const int size = 100;
+    char input[size];
+    char *myptr;
+    
+    cout <<"Enter a word or sentence: ";
+    cin.getline(input, size);
+    myptr = input;
+    
+    reverse(myptr);
+
+    return 0;
+}
+void reverse(char *p)
+{
+    int Length = strlen(p);
+    for (int i = Length; i >= 0; i--)
+    {
+        cout << p[i];
+    }
+}
+
+
+
+
+
+
