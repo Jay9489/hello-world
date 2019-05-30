@@ -1,0 +1,30 @@
+/******************************************************************************
+
+String Length 
+1. Ask user for a string. 
+2. Function that counts the # of chars in the string. 
+3. Return #. 
+CH10Q1
+
+*******************************************************************************/
+#include <stdio.h>
+#include<iostream>
+#include<cstring> 
+
+using namespace std;
+
+int main()
+{
+    const int size = 100;
+    char input[size];
+    int Length;
+    
+    cout <<"Enter a sentence: " << endl;
+    cin.getline(input, size);
+    
+    Length = strlen(input);
+    
+    cout << "The sentenced you entered is " << Length << " characters long \n";
+
+    return 0;
+}
