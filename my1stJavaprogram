@@ -1,0 +1,131 @@
+/******************************************************************************
+Geometry Calculator
+1. Calculate the area of a circle.
+2. Calculate the area of Rectangle.
+3.Calculate the Area of Triangle.
+4. Quit
+Enter your choice (1-4):
+5. If user enters anything outside 1-4 display error message.  
+6. If user enters negative values display error message. 
+7. If user enters 4 should exit program. 
+*******************************************************************************/
+import java.util.Scanner;
+public class Main
+{
+	public static void main(String[] args) 
+	{
+	    double input, // store user menu input;
+	    length, // store user input length
+	    width, // store user input width
+	    height, //store user input height
+	    radius,// store user input radius
+	    area, // store area
+	    base;
+	    
+	    Scanner keyboard = new Scanner(System.in); // obj to read input
+	    
+	    
+	    System.out.println("Geometry Calculator");
+	    System.out.println("\t 1. Calculate the Area of a Circle.");
+	    System.out.println("\t 2. Calculate the Area of a Rectangle.");
+	    System.out.println("\t 3. Calculate the Area of a Triangle.");
+	    System.out.println("\t 4. Quit.");
+	    System.out.print("\n \t Enter your choice (1-4): ");
+	    
+	    //Get input
+	    input = keyboard.nextInt(); 
+	    //input validation
+	    if (input > 4 || input < 0)
+	    {
+	        System.out.println("\nError! must select a valid option" +
+	                            "\n\tEnter your choice (1-4): ");
+	        input = keyboard.nextInt();
+	    }
+	    // option 1.
+	    if (input == 1)
+	    {
+	        System.out.print("\nCircle Calculator\n" + 
+	                            "\tEnter the radius: ");
+	        radius = keyboard.nextDouble();
+	        
+	        // input validation
+	        if (radius < 0)
+	        {
+	            System.out.print("/nError cannot be negative\n" +
+	                                "\tEnter the radius: ");
+	            radius = keyboard.nextDouble();            
+	        }
+	        
+	        //calculate area
+	        area = 3.14159 * (Math.pow(radius, 2));
+	        
+	        //display area
+	        System.out.print("\nThe area of the circle is ");
+	        System.out.printf("%.3f", area);
+	    }
+	    //option 2
+	    else if (input == 2)
+	    {
+	        System.out.println("Rectangle Area Calculator");
+	        System.out.print("\t Enter the Length: ");
+	        // get length
+	        length = keyboard.nextDouble();
+	        // input validation
+	        if (length < 0)
+	        {
+	            System.out.print("\nError cannot be negative\n" +
+	                                "Enter the Length: ");
+	            length = keyboard.nextDouble();
+	        }
+	        System.out.print("\nEnter the width: ");
+	        //get width
+	        width = keyboard.nextDouble();
+	        //input validation
+	        if (width < 0)
+	        {
+	            System.out.print("\nError cannot be negative\n" +
+	                                "Enter the width: ");
+	            width = keyboard.nextDouble();
+	        }
+	        //calculate area
+	        area = length * width;
+	        //display area
+	        System.out.print("\nThe area of the rectangle is ");
+	        System.out.printf("%.3f", area);
+	    }
+	    else if (input == 3)
+	    {
+	        System.out.println("Triangle Area Calculator");
+	        System.out.print("\t Enter the base: ");
+	        // get base
+	        base = keyboard.nextDouble();
+	        // input validation
+	        if (base < 0)
+	        {
+	            System.out.print("\nError cannot be negative\n" +
+	                                "Enter the base: ");
+	            base = keyboard.nextDouble();
+	        }
+	        System.out.print("\nEnter the height: ");
+	        //get height
+	        height = keyboard.nextDouble();
+	        //input validation
+	        if (height < 0)
+	        {
+	            System.out.print("\nError cannot be negative\n" +
+	                                "Enter the height: ");
+	            height = keyboard.nextDouble();
+	        }
+	        //calculate area
+	        area = base * height *.5;
+	        //display area
+	        System.out.print("\nThe area of the triangle is ");
+	        System.out.printf("%.3f", area);
+	    }
+	    // option 4
+	    else if (input == 4)
+	    {
+	        return;
+	    }
+	}
+}
