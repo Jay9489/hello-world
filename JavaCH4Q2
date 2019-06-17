@@ -1,0 +1,33 @@
+/******************************************************************************
+
+Distance travelled Ch4Q2
+
+*******************************************************************************/
+import java.util.Scanner;
+public class Main
+{
+	public static void main(String[] args) {
+		
+		double speed,
+		hour;
+		
+		Scanner keyboard = new Scanner(System.in);
+		
+		System.out.print("How long has the vehicle been travelling: ");
+		hour = keyboard.nextDouble();
+		
+		System.out.print("\nHow many miles per hour was the vehicle travelling: ");
+		speed = keyboard.nextDouble();
+		
+		
+		System.out.println("Hour    Distanced Traveled");
+		System.out.println("--------------------------");
+		for (int i = 1; i <= hour; i++)
+		{
+		    double distance = i * speed;
+		    System.out.println(i +"\t\t" + distance);
+		}
+		
+		
+	}
+}
