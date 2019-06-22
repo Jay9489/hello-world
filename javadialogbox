@@ -1,0 +1,100 @@
+package test;
+import javax.swing.JOptionPane;
+import java.io.*;
+import java.util.Scanner;
+
+public class hw02 
+{
+	public static void main(String[] args) throws IOException
+	{
+				PrintWriter pw = new PrintWriter("numbers.txt"); // create file
+				pw.close(); // close
+
+				printMenu(); //call menu
+		
+	}
+	
+	public static void printMenu() throws IOException
+	{
+		int i;
+		String a; // store input
+		a = JOptionPane.showInputDialog("(1)Save a number\n" + "(2)Print Sum\n" + "(3)Print Average\n" + "(4)Print high\n"
+								+ "(5)Quit"); // display dialog menu
+		i = Integer.parseInt(a); //convert string to int
+	 	if (i < 1 || i > 5) // input validation
+	 		{
+	 			JOptionPane.showMessageDialog(null, "Invalid choose option 1 - 5");
+	 			printMenu();
+	 		}
+	 
+	 	swap(i); // call swap method 
+	 
+	}
+	public static void swap(int a) throws IOException
+	{
+
+		switch(a) {
+		case 1:
+			String b = JOptionPane.showInputDialog("What number would you like saved to the file"); // get input w/ dialog box
+			
+			double c = Double.parseDouble(b); // parse to double
+			
+			FileWriter fw = new FileWriter("numbers.txt",true); // check if file exists without erasing
+			PrintWriter pw = new PrintWriter(fw);
+			pw.println(c); // write to file
+			pw.close(); // close
+			
+			printMenu(); // call menu
+		case 2:
+			double sum = 0.0; 
+			
+			File f = new File("numbers.txt");
+			Scanner kb = new Scanner(f);
+			
+			while (kb.hasNext()) // cycle to eof adding next doubles into sum
+			{
+				sum += kb.nextDouble();
+			}
+			kb.close();
+			JOptionPane.showMessageDialog(null, "The sum of the values in file are " + sum);
+			
+			printMenu();
+		case 3:
+			double avg = 0.0;
+			double s = 0.0;
+			int count = 0;
+			
+			File f1 = new File("numbers.txt");
+			Scanner kb1 = new Scanner(f1);
+			
+			while (kb1.hasNext()) // cycle to eof adding values into s and dividing by the total amount of values added to s.
+			{
+				s += kb1.nextDouble();
+				count++;
+			}
+			avg = s / count;
+			JOptionPane.showMessageDialog(null, "The average value in file is " + avg);
+			kb1.close();
+		
+		case 4: 
+			
+			File f2 = new File("numbers.txt");
+			Scanner kb2 = new Scanner(f2);
+			double high = kb2.nextDouble(); // set high to first value
+
+			while (kb2.hasNext()) // cycle through file if any value higher than the first high becomes that value;
+			{	double index = kb2.nextDouble(); 
+				if (high < index)
+				{
+					high = index;
+				}
+			}
+			kb2.close();
+			JOptionPane.showMessageDialog(null, "The biggest number in file is " + high);
+			
+			printMenu();
+		case 5: 
+			System.exit(0);
+		}
+	}
+}
