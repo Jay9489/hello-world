@@ -1,0 +1,40 @@
+/******************************************************************************
+To-Do: Write a Java program that ask user for file name; tests for whether the file exists; 
+and if file does exists, read the file to count number of lines in it; print the output on console.
+*******************************************************************************/
+import java.io.*;
+import java.util.Scanner;
+
+public class FileLineCounter
+{
+	public static void main(String[] args) throws IOException {
+	    
+	    String fileName; // hold file name. 
+	    int count = 0; // hold line count in file
+	    Scanner keyboard = new Scanner(System.in);
+	    
+	    
+		System.out.println("What is the name of the file?");
+		fileName = keyboard.nextLine(); // get filename
+		
+		// open file
+		File file = new File(fileName);
+		//test to see if file exists
+		if(!file.exists())
+		{
+		    System.out.println("The file does not exist.");
+		    System.exit(0);
+		}
+		Scanner inputFile = new Scanner(file); 
+		// count lines in file. 
+		while(inputFile.hasNext())
+		{
+		    inputFile.nextLine();
+		    count++;
+		}
+		System.out.println("There are " + count + " lines in this file");
+		
+		inputFile.close();
+		
+	}
+}
