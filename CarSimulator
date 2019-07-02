@@ -1,0 +1,129 @@
+/******************************************************************************
+Homework3 Car Instrument Simulator
+
+*******************************************************************************/
+public class Homework3
+{
+  public static void main (String[]args)
+    
+        // Create a FuelGuage object.
+        FuelGauge foo = new FuelGauge();
+        // Create a Odomoter object
+        Odometer o = new Odometer();
+        int a,b,c; 
+        
+
+// Fill the car up with gas.
+System.out.println("Fill ER UP BOYS");
+System.out.println("Pumping gas\t" + "Total Gallons: ");
+        // fill up gas tank
+        for (int i = 0; i < foo.max_fuel; i++)
+            
+                foo.fillErUp ();
+            
+            // set a = to amount of gas
+            a = foo.getFuel();
+            
+            // set milage and pass fuelgage class object
+            o.setMilage(999998, foo);
+            
+            //set b = to amount of miles on odometer
+            b = o.getMileage();
+            
+            //display odometer
+            System.out.println("\nThe odometer is set to: " + b);
+
+            System.out.println("Miles Driven\tFuel Remaining\t Odometer");
+        
+
+            //driving simulator
+            while (foo.getFuel() > 0) // while there is gas keep going!
+            
+                //set c = to miles driven and increment odometer
+                c = o.incrementOdometer(); 
+                System.out.print(c); // display miles driven
+                // display fuel remaining
+                a = foo.getFuel();
+                System.out.print("\t\t" + a);
+                //display odometer. 
+                b = o.getMileage();
+                System.out.println("\t\t" + b);
+            
+            
+    
+}
+class FuelGauge
+{
+    private int fuel = 0;  // fuel starts empty
+    public final int max_fuel = 15;  // set max fuel
+    
+    
+    public void setFuel(int f)
+    
+        fuel = f; 
+    
+    public void fillErUp() // fill up gas tank while there is room
+    
+        if (fuel < max_fuel) 
+        
+            fuel += 1; 
+            
+            System.out.print("..." + fuel );
+        
+        
+    
+    public void decrement() // decrement fuel
+    
+        if (fuel > 0)
+        
+            fuel--;
+        
+    
+    public int getFuel() // return fuel amount
+    
+        return fuel; 
+    
+    
+}
+class Odometer
+{
+    private int mileage;
+    private final int mpg = 24; // mpg of car
+    private final int max_milage = 999999; // max milage
+    public int count = 0; // intialize count
+    public int milesdriven = 0; // intialize milesdriven
+    private FuelGauge f; // fuelguage object
+    
+    public void setMilage(int m, FuelGauge FG) // setter
+    
+        mileage = m; 
+        f = FG;
+    
+    public int getMileage() // return milage on odometer
+    
+        return mileage; 
+    
+    public int incrementOdometer()
+    
+        mileage += 1; // increment odomoeter
+        count+= 1; // increment count to keep track of when to decrement fuel
+        milesdriven += 1; // track miles driven
+        
+        // if odometer surpasses max limit reset to 1
+        if (mileage > max_milage)
+            
+                mileage = 1; 
+            
+        // if count surpases mpg reset and decrement fuel
+        if (count >= mpg)
+        
+            f.decrement();
+            count = 0;
+        
+        // return the miles driven. 
+        return milesdriven; 
+    
+}
+
+
+
