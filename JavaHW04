@@ -1,0 +1,138 @@
+/******************************************************************************
+
+Demonstrate the classes in a program that has a Ship array.  Assign various Ship, CruiseShip, and CargoShip objects to the array elements.  
+The program should then step through the array, calling each object's toString method.  (See Code Listing 10-25 as an example.)
+
+*******************************************************************************/
+public class Main
+{
+	public static void main(String[] args) 
+	{
+	    String a;
+	    String b; 
+	    //Create an array of Ships
+	    Ship[] shipArr = new Ship[3];
+	    
+	    //first entry
+        shipArr[0] = new Ship("USS Abraham Lincoln", "1989");
+        
+        //second entry
+        shipArr[1] = new CruiseShip(5000, "USS Nimitz", "1968");
+        
+        //Third entry
+        shipArr[2] = new CargoShip(100000,"USS Gerald R. Ford", "2017");
+        
+        //Display
+        for (int i = 0; i <3 ; i++)
+        {
+            System.out.println(shipArr[i].toString());
+        }
+
+	}
+}
+class Ship 
+{
+    public String shipName;
+    public String yearBuilt;
+    
+    public Ship(String sn, String yb)
+    {
+        shipName = sn;
+        yearBuilt = yb; 
+    }
+    //set name
+    public void setName(String n)
+    {
+        this.shipName = n; 
+    }
+    // set year built
+    public void setYear(String y)
+    {
+        this.yearBuilt = y;
+    }
+    //accessor ship name
+    public String getName()
+    {
+        return shipName;
+    }
+    //accessor year built
+    public String getYear()
+    {
+        return yearBuilt;
+    }
+    // to string method
+    public String toString()
+    {
+       return "SHIPS NAME: " + shipName +"\nYear Built: " + yearBuilt + "\n";
+    }
+}
+class CruiseShip extends Ship
+{
+    private int max_pas;
+    
+    public CruiseShip (int num, String sn, String yb)
+    {
+        super(sn, yb);
+        max_pas = num; 
+    }
+    public void setMaxPas(int mp)
+    {
+        this.max_pas = mp;
+    }
+    public int getMaxPas()
+    {
+        return max_pas; 
+    }
+    public String toString()
+    {
+        return "SHIPS NAME: " + shipName +"\nYear Built: " + yearBuilt
+                    + "\nMax Passengers: " + max_pas + "\n";
+        
+    }
+}
+class CargoShip extends Ship 
+{
+    public int tonnage;
+    //constructor
+    public CargoShip(int ton, String sn, String yb)
+    {
+        super(sn, yb);
+        tonnage = ton; 
+    }
+    public void setTon(int t)
+    {
+        tonnage = t; 
+    }
+    public int getTon()
+    {
+        return tonnage; 
+    }
+    public String toString()
+    {
+        return "SHIPS NAME: " + shipName +"\nYear Built: " + yearBuilt
+                    + "\nTonnage Capacity: " + tonnage + "\n";
+        
+    }
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
