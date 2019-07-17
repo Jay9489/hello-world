@@ -1,0 +1,187 @@
+/******************************************************************************
+Producer Consumer
+*******************************************************************************/
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.io.*;
+import java.util.Scanner; 
+
+
+public class HW2
+{
+	public static void main(String[] args) throws IOException
+	{
+
+		//array list objects
+		List<Integer> buffer = new ArrayList<Integer>(); 
+		List<Integer> buffer2 = new ArrayList<Integer>(); 
+		
+		Thread thread1 = new Thread(new Producer(buffer, buffer2));
+		Thread thread2 = new Thread(new Consumer(buffer, buffer2));
+		thread1.start();
+		thread2.start();
+	    
+	}
+}
+class Producer implements Runnable
+{
+	List<Integer> buffer2 = null; // used as copy of buffer
+	List<Integer> buffer = null; 
+    final int Max_size = 8; // max size of numbers that can be put in file
+    private int i,a; // store nums
+    
+    public int max_num;
+    public int rnum;
+    
+    
+    public void inputFile() throws IOException
+    {
+    	//Scanner Object
+    	Scanner kb = new Scanner(System.in);
+    	
+    	//Get max num
+    	System.out.println("Enter max number: ");
+    	max_num = kb.nextInt(); 
+    	
+    	//create a file named test
+    	PrintWriter pw = new PrintWriter("inputFile.txt");
+    	
+    	//randomly generate numbers put them in a file
+    	Random randomNum = new Random();
+
+    	for (int index = 0; index < Max_size; index++)
+    	{
+    		rnum = randomNum.nextInt(max_num);
+    		pw.println(rnum);
+    	}
+    	pw.close();
+  
+       	// check if file exists than open.
+    	File f = new File("inputFile.txt");
+    	
+    	//scanner object for read in;
+    	Scanner kb1 = new Scanner(f);
+    	
+    	//i = next in on file and add to buffer1
+    	for (int index = 0; index < Max_size; index++)
+    	{
+    		a = kb1.nextInt();
+    		buffer2.add(a);
+    		
+    	}
+    }
+    public int test(int x)
+    {
+    		return buffer2.get(x);
+    }
+    // Constructor
+    public Producer(List<Integer> buffer, List<Integer> buffer2) throws IOException
+    {
+        super();
+        this.buffer = buffer; 
+        this.buffer2 = buffer2; 
+        inputFile();
+    }
+    public void run()
+    {
+        while(true)
+        {
+            try
+            {
+            	for (int index = 0; index < Max_size; index++)
+            	{
+            		i = test(index);
+            		produce(i); // produce i as argument
+            	}
+            }catch(InterruptedException exception){};    
+        }
+    }
+    
+    public void produce(int i) throws InterruptedException
+    {
+        synchronized(buffer)
+        {
+            while (buffer.size() == Max_size)
+            {
+                System.out.println("buffer is full.. waiting for consumer");
+                buffer.wait(); 
+            }
+        }
+        synchronized (buffer)
+        {
+            System.out.println("Produced: " + i);
+            buffer.add(i);
+            Thread.sleep(1000);
+            buffer.notify();
+        }
+    }
+}
+class Consumer implements Runnable
+{
+    List<Integer> buffer = null;
+    List<Integer> buffer2 = null;
+    final int max_size = 8; 
+    int c; 
+
+    
+    public Consumer(List<Integer> buffer,List<Integer> buffer2) throws IOException
+    {
+        super();
+        this.buffer = buffer; 
+        this.buffer2 = buffer2; 
+        outPutFile(); // to copy array to outputFile
+    }
+    public void outPutFile() throws IOException
+    {
+    	// Create new file for output
+    	PrintWriter pw1 =  new PrintWriter("outPutFile.txt");
+    	
+    	File f1 = new File ("outPutFile.txt");
+    	// copies array to outPutFile
+    	for (int index = 0; index < max_size; index++)
+    	{
+    		c = buffer2.get(index); 
+    		pw1.println(c);
+    	}
+    	pw1.close();
+
+    }
+    public void run() 
+    {
+        while(true) 
+        {
+            try
+            {
+                consume();
+            }catch(InterruptedException exception) {}   
+        }
+    }
+    
+    public void consume() throws InterruptedException
+    {
+        synchronized(buffer)
+        {
+        	//waits if buffer is empty
+            while(buffer.isEmpty())  
+            {
+                System.out.println("buffer is empty waiting for producer to produce");
+                buffer.wait(); 
+            }
+        }
+        synchronized (buffer)
+        {
+            Thread.sleep(1000);
+            System.out.println("consumed: " + buffer.remove(0));
+            buffer.notify();
+        }
+    }
+}
+
+
+
+
+
+
+
+
