@@ -1,0 +1,112 @@
+/******************************************************************************
+Student Professor
+*******************************************************************************/
+public class Hw03
+{
+    public static void main(String[] args)
+   {
+        System.out.println("Class is in session, any Questions? ");
+       
+	// create Cs421 Object
+        Cs421 cs = new Cs421();
+
+	// Create Prof object
+        Professor p = new Professor();
+	
+	//mutators
+        cs.setPf(p);
+        p.setClass(cs);
+
+    // Create students
+        Student Sansa = new Student("Sansa", "Why is Cersei so mean", cs);
+        Student Robb = new Student("Robb", "Do you like going to weddings ",cs);
+        Student Bran = new Student("Bran", "What things would you do for love ",cs);
+        Student Jon = new Student("Jon", "Am I a Bastard?",cs);
+        Student Arya = new Student("Arya", "How does one become no on ",cs);
+	    Student Tyrion = new Student ("Tyrion", "I drink and I know things", cs); 
+	    
+        // start student process
+        Sansa.start();
+        Robb.start();
+        Bran.start();
+        Jon.start();
+        Arya.start();
+   
+    }
+
+
+}
+class Student extends Thread
+{
+    //store question
+    public String question; 
+    
+    //store name
+    public String name;
+    Cs421 cl;
+	
+   //constructor 
+    Student(String n, String q, Cs421 cs)
+    {
+	    question = q;
+        name = n;
+        cl = cs;
+    }
+   // student asks questions when its there turn.
+    public void run()
+    {
+        String message = "Professor, " +  question + " ? ";
+       
+        while(true)
+        {
+ 	    //try to ask, sleep/wait if you cant.
+            cl.questionStart(message, name);
+            try
+            {
+		// 2 second sleeper
+                Thread.sleep(2000); 
+            }catch(Exception exception){System.out.println("error : " + exception);}
+        }
+    }
+   
+   
+}
+class Cs421
+{
+	//Professor object
+    Professor pf;
+   	
+	//Prof mutator
+    public void setPf(Professor p)
+    {
+        pf = p;
+    }
+   
+    public synchronized void questionStart(String msg, String name)
+    {
+        System.out.println(name + ": " + msg);
+        pf.answerStart(name);
+        System.out.println("\n");
+    }
+   
+}
+class Professor
+{
+    // CS421 class object
+    Cs421 cl;
+    
+    //professors reply
+    String reply = "you know nothing!";
+   
+   //mutator
+    public void setClass(Cs421 cs)
+    {
+        cl = cs;
+    }
+
+    public void answerStart(String name)
+    {
+        System.out.println("Professor: " + name + ", " + reply);
+    }
+   
+}
